@@ -13,9 +13,10 @@ const Navbar = () => (
         <li><NavLink activeClassName="selected" className="nav-link" exact to="/">Home</NavLink></li>
         <li><NavLink activeClassName="selected" className="nav-link" to="/women">Women</NavLink></li>
         <li><NavLink activeClassName="selected" className="nav-link" to="/men">Men</NavLink></li>
+        <li data-cy='go-to-wishlist'><NavLink activeClassName="selected" className="nav-link" to="/wishlist">Wishlist</NavLink></li>
       </ul>
     </div>
-    <div className="shopping-cart">
+    <div data-cy='go-to-cart' className="shopping-cart">
       <NavLink to="/cart"><Icon medium>shopping_cart</Icon></NavLink>
     </div>
   </nav>

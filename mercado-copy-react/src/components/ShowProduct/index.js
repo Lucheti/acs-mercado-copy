@@ -6,6 +6,9 @@ import { Icon } from 'react-materialize';
 //Internals
 import PRODUCTS from '../Data';
 import './index.css';
+import {bindActionCreators} from "redux";
+import {addProduct, addToWishlist, removeProduct, resetCart} from "../../actions";
+import {connect} from "react-redux";
 
 class ShowProduct extends Component {
   render () {
@@ -24,6 +27,8 @@ class ShowProduct extends Component {
             <div className="product-bio">
               <p id="product-description">{currentProduct.description}</p>
               <p id="product-price">${currentProduct.price}</p>
+              <button data-cy='add-product' onClick={()=> this.props.add(product)}>Add to cart</button>
+              <button data-cy='add-to-wishlist' onClick={()=> this.props.addToWishlist(product)}>Add to wishlist</button>
               <Icon small id="add-icon">add_shopping_cart</Icon>
             </div>
             <div className="product-review">
@@ -71,4 +76,8 @@ class ShowProduct extends Component {
   }
 }
 
-export default ShowProduct;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({add: addProduct, addToWishlist: addToWishlist}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(ShowProduct);

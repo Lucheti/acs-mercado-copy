@@ -1,4 +1,6 @@
-const products = [
+import { Product } from '../../../../common/Product'
+
+const products: Product[] = [
   {
     id: 1,
     name: "Brown Shirt",

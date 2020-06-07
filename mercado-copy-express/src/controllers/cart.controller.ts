@@ -1,26 +1,26 @@
 import { NextFunction, Request, Response } from 'express'
-import { WishlistService } from '../services/wishlist.service'
+import { CartService } from '../services/cart.service'
 
-class WishlistController {
-  private wishlistService: WishlistService = new WishlistService();
+class CartController {
+  private cartService: CartService = new CartService();
 
   public getAll = (req: Request, res: Response, next: NextFunction) => {
     const user: string = req.cookies['userId']
-    this.wishlistService.getAll(user)
+    this.cartService.getAll(user)
       .then( data => res.send(data) )
   }
 
   public add = (req: Request, res: Response, next: NextFunction) => {
     const userId: string = req.cookies['userId']
-    this.wishlistService.add({...req.body}, userId);
+    this.cartService.add({...req.body}, userId);
     res.send({ message: 'added' });
   }
 
   public delete = (req: Request, res: Response, next: NextFunction) => {
     const userId: string = req.cookies['userId']
-    this.wishlistService.delete({...req.body}, userId)
-    res.send({ message: 'deleted' });
+    this.cartService.delete({...req.body}, userId)
+    res.send({ message: 'deleted, but not really' });
   }
 }
 
-export default WishlistController;
+export default CartController;

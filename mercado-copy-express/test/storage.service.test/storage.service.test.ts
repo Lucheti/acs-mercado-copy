@@ -1,5 +1,4 @@
 import { StorageService } from '../../src/services/stock-service/storage.service';
-import { Storage } from '../../src/interfaces/storage.interface';
 
 const storages = new StorageService();
 test('storageService get storages not null', () => {
@@ -11,6 +10,7 @@ test('All storages products not to be null', () => {
     expect(st.products).not.toBeNull();
   });
 });
+
 test('Different existing products general stock', async () => {
   const stock = await storages.getStockForProductAtAnyStorage(1);
   expect(stock).toBe(14);
@@ -24,12 +24,14 @@ test('Invalid Product Id stock to be 0', async () => {
   expect(stock).toBe(0);
   expect(stock).toBe(0);
 });
+
 test('Stock of product 2 at a certain storage', async () => {
   let stock = await storages.getStockForProductAtStorage(2, -1);
   expect(stock).toBe(0);
   stock = await storages.getStockForProductAtStorage(2, 1);
   expect(stock).toBe(2);
 });
+
 test('Storage of testion Notepad For Geeks (id 12345) should be storage 1 and array length = 1', async() => {
   const storage = await storages.getStoragesForProduct(12345);
   expect(storage.length).toBe(1);

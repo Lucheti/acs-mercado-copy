@@ -29,14 +29,14 @@ class Items extends Component {
                                 </Link>
                                 <div className="price-add">
                                     <h5 id="product-price">${product.price}</h5>
-                                    <button data-cy='add-product-to-cart' onClick={() => this.props.add(product)}>Add to
-                                        cart
-                                    </button>
-                                    <button data-cy='add-product-to-wishlist' onClick={() => this.props.addToWishlist(product)}>Add to
+                                    <button data-cy='add-product-to-wishlist'
+                                            onClick={() => this.props.addToWishlist(product)}>Add to
                                         wishlist
                                     </button>
-                                    <Icon small onClick={() => this.props.add(product)}
-                                          id="add-icon">add_shopping_cart</Icon>
+                                    <div data-cy='add-product-to-cart' onClick={() => this.props.add(product)}>
+                                        <Icon small
+                                              id="add-icon">add_shopping_cart</Icon></div>
+
                                 </div>
                             </div>
                         )

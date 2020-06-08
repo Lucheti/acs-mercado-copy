@@ -37,10 +37,12 @@ describe("cart test", () => {
             cy.wait(1000);
             cy.get('[data-cy=cart-items-list]').contains(name).should('exist')
             cy.wait(1000);
+            cy.get('[data-cy=product-quantity]').contains(1).should('exist')
+            cy.wait(1000);
         });
     });
 
-    it('should add the first product from the home to the cart', () => {
+    it('should add the first product once from the home to the cart', () => {
         let name
         cy.get(':nth-child(1) > a > .product-details > #product-name').then($name => {
             name = $name.text()
@@ -58,6 +60,36 @@ describe("cart test", () => {
             cy.get('[data-cy=cart-items-list]').should("exist")
             cy.wait(1000);
             cy.get('[data-cy=cart-items-list]').contains(name).should('exist')
+            cy.wait(1000);
+            cy.get('[data-cy=product-quantity]').contains(1).should('exist')
+            cy.wait(1000);
+        });
+    });
+
+    it('should add the first product with a quantity of five from the home to the cart', () => {
+        let name
+        cy.get(':nth-child(1) > a > .product-details > #product-name').then($name => {
+            name = $name.text()
+            cy.wait(1000);
+            cy.get('[data-cy=plus-one]').first().click();
+            cy.get('[data-cy=plus-one]').first().click();
+            cy.get('[data-cy=plus-one]').first().click();
+            cy.get('[data-cy=plus-one]').first().click();
+            cy.get('[data-cy=plus-one]').first().click();
+            cy.wait(1000);
+            cy.get('[data-cy=counter]').first().contains(5)
+            cy.wait(1000);
+            cy.get('[data-cy=add-product-to-cart]').first().click();
+            cy.wait(1000);
+            cy.get('[data-cy=go-to-cart]').click();
+            cy.wait(1000);
+            cy.get('[data-cy=empty-cart-message]').should("not.exist")
+            cy.wait(1000);
+            cy.get('[data-cy=cart-items-list]').should("exist")
+            cy.wait(1000);
+            cy.get('[data-cy=cart-items-list]').contains(name).should('exist')
+            cy.wait(1000);
+            cy.get('[data-cy=product-quantity]').contains(5).should('exist')
             cy.wait(1000);
         });
     });

@@ -30,7 +30,7 @@ class CartProducts extends Component {
                                     <h4>{product.product.name}</h4>
                                     <p id="product-description">{product.product.description}</p>
                                     <p id="product-price">${product.product.price}</p>
-                                    <p>Quantity: {product.quantity}</p>
+                                    <p data-cy='product-quantity'>Quantity: {product.quantity}</p>
                                     <button data-cy='remove-from-cart' onClick={() => this.props.remove(product)}>Remove
                                     </button>
 

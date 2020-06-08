@@ -1,7 +1,6 @@
 //Dependencies
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
 //Internals
 import './index.css';
 import {bindActionCreators} from "redux";
@@ -16,13 +15,26 @@ class CartProducts extends Component {
     render() {
         return (
             <div>
-                {this.props.list.length >=1 && <button data-cy='reset-cart' onClick={() => this.props.reset()}>Empty cart</button>}
-                <h1>This is the cart</h1>
-                {this.props.list.length >= 1 ? <div className="items" data-cy="cart-items-list">
+                {this.props.list.length >= 1 &&
+                <button data-cy='reset-cart' onClick={() => this.props.reset()}>Empty cart</button>}
+                <div className="page-title">
+                    <h4>Shopping cart</h4>
+                </div>
+                {this.props.list.length >= 1 ? <div className="items" style={{"justify-content": "start"}} data-cy="cart-items-list">
                         {this.props.list.map(product => (
-                            <div key={product.id}>
-                                <h1>{product.name}</h1>
-                                <button data-cy='remove-from-cart' onClick={() => this.props.remove(product)}>Remove</button>
+                            <div style={{display: "flex", "min-width": "100%"}}>
+                                <div className="item-image">
+                                    <img style={{height:"13em"}} className="product-image" src={product.product.img} alt="product"/>
+                                </div>
+                                <div>
+                                    <h4>{product.product.name}</h4>
+                                    <p id="product-description">{product.product.description}</p>
+                                    <p id="product-price">${product.product.price}</p>
+                                    <p>Quantity: {product.quantity}</p>
+                                    <button data-cy='remove-from-cart' onClick={() => this.props.remove(product)}>Remove
+                                    </button>
+
+                                </div>
                             </div>
                         ))}
                     </div> :

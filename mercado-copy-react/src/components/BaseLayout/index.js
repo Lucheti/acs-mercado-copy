@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // Externals
 import Navbar from './components/NavBar';
 import Header from './components/Header';

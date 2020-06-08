@@ -1,7 +1,7 @@
-export const addProduct = product => {
+export const addProduct = (product, quantity) => {
     return{
         type: "ADD",
-        data: product
+        data: {product: product, quantity:quantity}
     }
 }
 

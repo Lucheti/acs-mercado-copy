@@ -6,6 +6,7 @@ import './index.css';
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux'
 import {removeProduct, resetCart} from "../../actions";
+import CartItem from "./Item/CartItem";
 
 class CartProducts extends Component {
     static propTypes = {
@@ -20,22 +21,13 @@ class CartProducts extends Component {
                 <div className="page-title">
                     <h4>Shopping cart</h4>
                 </div>
-                {this.props.list.length >= 1 ? <div className="items" style={{"justify-content": "start"}} data-cy="cart-items-list">
+                <p>Total: ${this.props.list.reduce(function (acc, object) {
+                    return acc += object.quantity * object.product.price
+                }, 0)}</p>
+                {this.props.list.length >= 1 ?
+                    <div className="items" style={{"justify-content": "start"}} data-cy="cart-items-list">
                         {this.props.list.map(product => (
-                            <div style={{display: "flex", "min-width": "100%"}}>
-                                <div className="item-image">
-                                    <img style={{height:"13em"}} className="product-image" src={product.product.img} alt="product"/>
-                                </div>
-                                <div>
-                                    <h4>{product.product.name}</h4>
-                                    <p id="product-description">{product.product.description}</p>
-                                    <p id="product-price">${product.product.price}</p>
-                                    <p data-cy='product-quantity'>Quantity: {product.quantity}</p>
-                                    <button data-cy='remove-from-cart' onClick={() => this.props.remove(product)}>Remove
-                                    </button>
-
-                                </div>
-                            </div>
+                            <CartItem product={product}/>
                         ))}
                     </div> :
                     <div data-cy='empty-cart-message'>There are no products in the cart</div>}

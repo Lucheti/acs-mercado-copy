@@ -82,7 +82,7 @@ describe("wishlist test", () => {
     it('should clear all the products in the wishlist', () => {
         cy.get('.items > :nth-child(1)').click();
         cy.wait(1000);
-        cy.get('[data-cy=add-product]').click();
+        cy.get('[data-cy=add-to-wishlist]').click();
         cy.wait(1000);
         cy.get('[data-cy=go-to-wishlist]').click();
         cy.wait(1000);

@@ -10,7 +10,7 @@ const Navbar = () => (
   <nav className="navbar">
     <div className="nav-links">
       <ul>
-        <li><NavLink activeClassName="selected" className="nav-link" exact to="/">Home</NavLink></li>
+        <li><NavLink data-cy="go-to-home" activeClassName="selected" className="nav-link" exact to="/">Home</NavLink></li>
         <li><NavLink activeClassName="selected" className="nav-link" to="/women">Women</NavLink></li>
         <li><NavLink activeClassName="selected" className="nav-link" to="/men">Men</NavLink></li>
         <li data-cy='go-to-wishlist'><NavLink activeClassName="selected" className="nav-link" to="/wishlist">Wishlist</NavLink></li>

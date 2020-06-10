@@ -2,13 +2,13 @@ const wishlistReducer = (
     state = [], action
 ) => {
     switch (action.type) {
-        case "ADD": {
+        case "ADD TO WISHLIST": {
             return [...state, action.data]
         }
-        case "REMOVE": {
-            return [...state].filter(c => c.id !== action.data.id)
+        case "REMOVE FROM WISHLIST": {
+            return [...state].filter(c => c.id !== action.data)
         }
-        case "RESET": {
+        case "RESET WISHLIST": {
             return []
         }
         default: {

@@ -1,4 +1,4 @@
-import { Product } from '../interfaces/product.interface';
+import { Product } from '../interfaces/product';
 import { Storage } from '../interfaces/storage.interface';
 
 // password: q1w2e3r4

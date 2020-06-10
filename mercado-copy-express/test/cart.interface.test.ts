@@ -1,5 +1,5 @@
-import {Cart} from '../src/interfaces/cart.interface';
-import {Product} from '../src/interfaces/product.interface';
+import {Cart} from '../src/interfaces/cart';
+import {Product} from '../src/interfaces/product';
 
 let cart: Cart;
 let product1: Product;

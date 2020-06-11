@@ -1,5 +1,7 @@
 import {Product} from './product';
 
+//TODO: add userId to CART
+
 export class Cart {
     cartId: number;
     products: Product[];
@@ -17,14 +19,18 @@ export class Cart {
     }
 
     public removeProduct(productId:number):void {
-        this.products.filter(p=>p.productId === productId)
+        this.products = this.products.filter(p => p.productId !== productId)
     }
 
     public removeAllProducts():void {
         this.products = []
     }
 
-    public quantityOf(productId:number): number{
-        return this.products.filter(p=>p.productId === productId).length
+    public quantityOf(productId:number): number {
+        return this.products.filter( p => p.productId === productId ).length
+    }
+
+    public size(): number {
+        return this.products.length
     }
 }

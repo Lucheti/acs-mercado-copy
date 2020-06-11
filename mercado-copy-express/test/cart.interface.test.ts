@@ -1,89 +1,120 @@
 import {Cart} from '../src/interfaces/cart';
 import {Product} from '../src/interfaces/product';
 
-let cart: Cart;
-let product1: Product;
-let product2: Product;
+describe('cart tests', () => {
+    let cart: Cart;
 
-describe('when creating a cart', () => {
-    beforeAll(() => {
-        cart = new Cart();
-    });
-    it('should be empty', function () {
-        expect(cart.isEmpty()).toBeTruthy()
-    });
-});
+    describe('when creating cart', () => {
+        beforeAll(() => {
+            cart = new Cart();
+        });
+        it('should be empty', function () {
+            expect(cart.isEmpty()).toBeTruthy()
+        });
+    })
 
-describe('when an item is added to a cart', () => {
-    beforeEach(() => {
-        cart = new Cart();
-        product1 = new Product(1,"Aceitunas", "Pepito");
-        product2 = new Product(2,"Papas", "Papita");
-    });
-    it('should not be empty', function () {
-        cart.addProduct(product1)
-        expect(cart.isEmpty()).not.toBeTruthy()
-    });
-    it('can be removed from the cart', function () {
-        cart.removeProduct(product1.productId)
-        expect(cart.isEmpty()).toBeTruthy()
-    });
-});
+    describe('when adding items to the cart', () => {
+        const productToAdd: Product = new Product(1,"some name", "some brand");
 
-describe('when removing a product that is not in the cart', () => {
-    beforeEach(() => {
-        cart = new Cart();
-        product1 = new Product(1,"Aceitunas", "Pepito");
-        product2 = new Product(2,"Papas", "Papita");
-    });
-    it('should not be empty', function () {
-        cart.addProduct(product1)
-        cart.removeProduct(product2.productId)
-        expect(cart.isEmpty()).not.toBeTruthy()
-    });
-});
+        describe('when adding a single product', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(productToAdd)
+            });
 
-describe('when removing all the products in the cart', () => {
-    beforeAll(() => {
-        cart = new Cart();
-        product1 = new Product(1,"Aceitunas", "Pepito");
-        product2 = new Product(2,"Papas", "Papita");
-    });
-    it('should be empty', function () {
-        cart.addProduct(product1)
-        cart.addProduct(product2)
-        cart.removeAllProducts()
-        expect(cart.isEmpty()).toBeTruthy()
-    });
-});
+            it('should have added the product correctly', () => {
+                expect(cart.quantityOf(productToAdd.productId)).toEqual(1)
+            })
 
-describe('when adding 3 many equal products', () => {
-    beforeEach(() => {
-        cart = new Cart();
-        product1 = new Product(1,"Aceitunas", "Pepito");
-        product2 = new Product(2,"Papas", "Papita");
-    });
-    it('should have a quantity of 3', function () {
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        expect(cart.quantityOf(product1.productId)).toBe(3)
-    });
-});
+            it('should not be empty', () => {
+                expect(cart.isEmpty()).toBeFalsy()
+            })
+        })
 
-// Triangulation test is used to re triangulate the result of the previous test
-// It can be commented
-describe('when adding 5 many equal products', () => {
-    beforeAll(() => {
-        cart = new Cart();
-        product1 = new Product(1,"Aceitunas", "Pepito");
-    });
-    it('should have a quantity of 3', function () {
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        cart.addProduct(product1)
-        expect(cart.quantityOf(product1.productId)).toBe(5)
-    });
-});
+        describe('when adding 3 times a single product', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+            });
+
+            it('should have added the product correctly', () => {
+                expect(cart.quantityOf(productToAdd.productId)).toEqual(3)
+            })
+
+            it('should not be empty', () => {
+                expect(cart.isEmpty()).toBeFalsy()
+            })
+        })
+
+        describe('when adding 5 times a single product', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+                cart.addProduct(productToAdd)
+            });
+
+            it('should have added the product correctly', () => {
+                expect(cart.quantityOf(productToAdd.productId)).toEqual(5)
+            })
+
+            it('should not be empty', () => {
+                expect(cart.isEmpty()).toBeFalsy()
+            })
+        })
+    })
+
+    describe('when removing from cart', () => {
+        describe('when product is not on the cart', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(new Product(1,"some name", "some brand"))
+                cart.removeProduct(2)
+            })
+
+            it('should not have deleted other item', () => {
+                expect(cart.quantityOf(1)).toEqual(1)
+            })
+
+            it('should have expected length', () => {
+                expect(cart.size()).toEqual(1)
+            })
+        })
+
+        describe('when removing that exists in the cart', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(new Product(1,"some name", "some brand"))
+                cart.removeProduct(1)
+            })
+
+            it('should not have deleted other item', () => {
+                expect(cart.quantityOf(1)).toEqual(0)
+            })
+
+            it('should have expected length', () => {
+                expect(cart.size()).toEqual(0)
+            })
+        })
+
+        describe('when removing all products', () => {
+            beforeAll(() => {
+                cart = new Cart();
+                cart.addProduct(new Product(1,"some name", "some brand"))
+                cart.addProduct(new Product(2,"some name", "some brand"))
+                cart.addProduct(new Product(3,"some name", "some brand"))
+                cart.addProduct(new Product(4,"some name", "some brand"))
+                cart.removeAllProducts()
+            })
+
+            it('should have expected length', () => {
+                expect(cart.size()).toEqual(0)
+            })
+        })
+    })
+
+})

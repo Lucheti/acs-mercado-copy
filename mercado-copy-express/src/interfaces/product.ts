@@ -11,11 +11,11 @@ export class Product {
         this.amount = 1;
     }
 
-    public add(){
+    public add():void{
         this.amount += 1
     }
 
-    public remove(){
+    public remove():void{
         if (this.amount) this.amount -= 1
     }
 }

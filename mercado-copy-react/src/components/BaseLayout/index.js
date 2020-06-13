@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // Externals
 import Navbar from './components/NavBar';
 import Header from './components/Header';
@@ -39,6 +39,9 @@ export default class BaseLayout extends Component {
           <Navbar />
           <Header />
         </div>
+        {/*<Toast*/}
+        {/*    toastList={this.props.list}*/}
+        {/*/>*/}
         <div className="content">
           {this.props.children}
         </div>

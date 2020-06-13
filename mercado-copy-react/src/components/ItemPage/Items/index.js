@@ -1,35 +1,35 @@
 //Dependencies
-import React from 'react';
-import { Icon } from 'react-materialize';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
 //Internals
 import PRODUCTS from '../../Data';
+import {bindActionCreators} from "redux";
 
-const Items = ({ productMapper }) => (
-  <div className="items">
-    {PRODUCTS.map((product) => {
-      debugger
-      if (productMapper(product)) {
-        return(
-          <div className="item">
-            <Link to={`/products/${product.id}`}>
-            <div className="product-img">
-              <img alt={product.name} src={product.img} />
-            </div>
-            <div className="product-details">
-              <h1 id="product-name">{product.name}</h1>
-              <h4 id="product-description">{product.description}</h4>
-            </div>
-            </Link>
-            <div className="price-add">
-              <h5 id="product-price">${product.price}</h5>
-              <Icon small onClick={() => this.addProduct(product)} id="add-icon">add_shopping_cart</Icon>
-            </div>
-          </div>
-        )
-      }
-    })}
-  </div>
-)
+import {connect} from "react-redux";
+import {addProduct, addToWishlist} from "../../../actions";
+import Tile from "../Tile";
 
-export default Items;
+class Items extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        const {productMapper} = this.props
+        return (
+            <div className="items">
+                {PRODUCTS.map((product) => {
+                    if (productMapper(product)) {
+                        return (
+                           <Tile product={product}/>
+                        )
+                    }
+                })}
+            </div>)
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({add: addProduct, addToWishlist: addToWishlist}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Items);

@@ -15,5 +15,5 @@ jobs:
           wait-on: http://localhost:3030
           browser: chrome
           headless: true
-          working_directory: mercado-copy-react
+          working-directory: mercado-copy-react
     

@@ -7,25 +7,21 @@ services:
     links:
       - backend
       
-  db:
-    image: postgres
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
+db:
+  image: postgres:11.2-alpine
 
-  backend:
-    build: ./mercado-copy-express
-     depends_on:
-      - db
-    # deploy:
-    #   resources:
-    #     limits:
-    #       # percentage of cpu
-    #       cpus: '0.5'
-    #       memory: 100M
-    #     reservations:
-    #       cpus: '0.25'
-    #       memory: 50M
-    ports:
-      - 9000:8080
+backend:
+  build: ./mercado-copy-express
+  depends_on:
+    - db
+  # deploy:
+  #   resources:
+  #     limits:
+  #       # percentage of cpu
+  #       cpus: '0.5'
+  #       memory: 100M
+  #     reservations:
+  #       cpus: '0.25'
+  #       memory: 50M
+  ports:
+    - 9000:8080

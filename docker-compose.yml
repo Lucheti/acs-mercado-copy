@@ -6,9 +6,18 @@ services:
       - 3000:3000
     links:
       - backend
+      
+  db:
+    image: postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   backend:
     build: ./mercado-copy-express
+     depends_on:
+      - db
     # deploy:
     #   resources:
     #     limits:

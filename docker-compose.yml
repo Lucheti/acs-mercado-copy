@@ -1,0 +1,22 @@
+version: '3'
+services:
+  frontend:
+    build: ./mercado-copy-react
+    ports:
+      - 3000:3000
+    links:
+      - backend
+
+  backend:
+    build: ./mercado-copy-express
+    # deploy:
+    #   resources:
+    #     limits:
+    #       # percentage of cpu
+    #       cpus: '0.5'
+    #       memory: 100M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 50M
+    ports:
+      - 9000:8080

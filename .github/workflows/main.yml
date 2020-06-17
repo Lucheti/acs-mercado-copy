@@ -27,4 +27,6 @@ jobs:
           headless: true
           working-directory: mercado-copy-react
           parallel: true
+          record: false
+          group: 'Cypress group'  
     

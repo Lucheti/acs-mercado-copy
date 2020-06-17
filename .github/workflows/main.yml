@@ -26,7 +26,6 @@ jobs:
           browser: chrome
           headless: true
           working-directory: mercado-copy-react
-          record: true
           parallel: true
           group: 'Cypress tests'
     

@@ -8,6 +8,12 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # the actual items in the array do not matter,
+        # just the number - to force CI to sping 3 copies
+        # of the current job in parallel
+        machines: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -20,4 +26,7 @@ jobs:
           browser: chrome
           headless: true
           working-directory: mercado-copy-react
+          record: true
+          parallel: true
+          group: 'Cypress tests'
     

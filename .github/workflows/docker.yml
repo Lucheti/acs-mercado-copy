@@ -1,4 +1,4 @@
-name: Build and Publish Docker
+name: Login and Build Docker
 on:
   push:
     branches: [ master ]
@@ -15,6 +15,6 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
         run: docker-compose build
-      - name: Push
-        run: |
-          docker pushdocker push mercadocopy/mercado-copy:lastest
+#      - name: Push
+#        run: |
+#          docker pushdocker push mercadocopy/mercado-copy:lastest

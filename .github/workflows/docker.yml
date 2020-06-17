@@ -14,12 +14,7 @@ jobs:
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
-        run: docker-compose build -t mercado
-      - name: Tags
-        run: |
-          docker tag mercado ${{ secrets.DOCKER_USER }}/mercado:${{ github.sha }}
-          docker tag mercado ${{ secrets.DOCKER_USER }}/mercado:latest
+        run: docker-compose build
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/mercado:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/mercado:latest
+          docker pushdocker push mercadocopy/mercado-copy:lastest
